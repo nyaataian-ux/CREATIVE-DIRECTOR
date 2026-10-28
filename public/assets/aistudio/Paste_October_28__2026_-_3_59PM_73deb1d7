@@ -1,0 +1,1175 @@
+# MASTER BUILD BLUEPRINT
+# CREATIVE ARCHITECT AI
+## AI Creative Art Director, Graphic Designer and Editable Artwork Production Studio
+
+Build a complete, working, full-stack web application named **CREATIVE ARCHITECT AI**.
+
+This must be an operational design application, not a static dashboard, landing page, chatbot mockup or UI-only prototype.
+
+The application must combine multimodal AI analysis, reference-based design intelligence, creative direction, structured prompt engineering, editable SVG generation, PDF export, artwork inspection and quality assurance.
+
+The target user is a professional graphic designer and creative consultant producing premium advertising, pharmaceutical communications, healthcare campaigns, brochures, product labels, posters and brand assets.
+
+The application must prioritise professional art direction, exact content, asset integrity, editable deliverables and reliable production.
+
+Build the application in a modular, maintainable architecture. Implement the core functionality end to end before adding optional features.
+
+---
+
+# PART 1 — PRODUCT VISION
+
+## 1.1 Mission
+
+Create an AI creative director that can:
+
+1. Inspect and analyse supplied reference artwork.
+2. Extract reusable design principles from those references.
+3. Accept a structured creative brief.
+4. Understand communication objectives and target audiences.
+5. Develop original creative concepts.
+6. Select a design direction and explain its rationale.
+7. Generate detailed image-generation and layout-construction prompts.
+8. Construct actual editable graphic artwork.
+9. Preserve supplied brand assets and approved text.
+10. Render the artwork for visual inspection.
+11. Export an editable SVG and a PDF.
+12. Identify weaknesses, revise the artwork and run quality checks.
+13. Package the final deliverables with a design specification and QA report.
+
+The AI must think in terms of communication, design systems, hierarchy, composition, brand integrity and production constraints.
+
+It must not behave like a generic image generator that produces a flattened image and calls the task complete.
+
+## 1.2 Initial project specification
+
+Use the following as the default example project:
+
+- Artwork: A1 portrait poster.
+- Objective: Product-awareness campaign.
+- Audience: Healthcare professionals and consumers.
+- Art direction: Premium, sophisticated and clean.
+- Primary editable deliverable: SVG.
+- Final deliverable: PDF.
+- Additional deliverables: PNG preview, generation prompt, design rationale, layout specification and QA report.
+- Required constraints: Preserve supplied logos, product pack shots, approved claims and exact text.
+- Medical rule: Never invent medical claims.
+
+All example values must remain editable by the user.
+
+Do not fabricate a product name, brand identity, approved claim, logo, pack shot or headline. When project assets have not yet been supplied, provide a clear onboarding state and identify what is missing.
+
+---
+
+# PART 2 — APPLICATION INTERFACE
+
+## 2.1 Visual design
+
+Create a sophisticated, dark-neutral professional creative workspace inspired by premium design software and editorial production tools.
+
+Use:
+- A restrained charcoal or deep-neutral interface.
+- Neutral grey surfaces.
+- Carefully limited accent colour.
+- Clear typography and strong information hierarchy.
+- Compact, purposeful controls.
+- Large artwork preview.
+- Useful empty states and progress indicators.
+- Responsive layouts.
+- Accessible contrast and keyboard-friendly controls.
+
+Avoid a generic AI dashboard appearance, excessive rounded cards, distracting gradients, decorative 3D icons and unnecessary animations.
+
+The interface itself should demonstrate good graphic design principles.
+
+## 2.2 Main navigation
+
+Create these sections:
+
+1. Creative Workspace
+2. Reference Library
+3. Brand and Asset Library
+4. Creative Brief
+5. Concept Development
+6. Prompt Studio
+7. Artwork Editor
+8. Critique and QA
+9. Project History
+10. Settings
+
+The main workspace should show the current project, brief status, selected references, concept status, artwork preview, quality checks and available exports.
+
+## 2.3 Project creation
+
+Provide a New Project action.
+
+When clicked, open a structured project form containing:
+
+- Project name.
+- Client or brand name.
+- Artwork category.
+- Communication objective.
+- Target audience.
+- Main message.
+- Approved copy.
+- Required assets.
+- Reference artworks.
+- Format and dimensions.
+- Desired art direction.
+- Brand guidelines.
+- Mandatory inclusions.
+- Prohibited changes.
+- Output formats.
+- Production requirements.
+- Approval status.
+
+Support saving a draft and resuming it later.
+
+Never discard an existing project silently when the user starts another one.
+
+---
+
+# PART 3 — REFERENCE INTELLIGENCE ENGINE
+
+## 3.1 Reference uploads
+
+Allow users to upload reference files including PNG, JPG, WebP, SVG and PDF.
+
+For PDF references, support inspection of rendered pages and extraction of available text. Handle multi-page PDFs and identify the page being analysed.
+
+Show:
+- Reference thumbnail.
+- Filename.
+- Upload status.
+- Reference category.
+- User notes.
+- Analysis status.
+- Analysis results.
+
+Validate file types and file sizes. Handle unsupported or corrupt files gracefully.
+
+Do not pretend to analyse files that failed to upload or parse.
+
+## 3.2 Multimodal analysis
+
+Use an appropriate available Gemini multimodal model through the server-side API.
+
+Analyse each reference using this schema:
+
+A. Metadata
+- Reference ID.
+- Filename.
+- Artwork type.
+- Aspect ratio.
+- Intended audience, if known.
+- Communication objective, if known.
+- Brand context, if known.
+
+B. Composition
+- Canvas proportions.
+- Layout zones.
+- Margins.
+- Grid.
+- Alignment.
+- Focal point.
+- Visual balance.
+- Reading sequence.
+- Negative space.
+- Element relationships.
+
+C. Typography
+- Headline hierarchy.
+- Typeface characteristics.
+- Font-weight relationships.
+- Approximate type scale.
+- Line spacing.
+- Tracking.
+- Alignment.
+- Text density.
+- Legibility.
+
+D. Colour
+- Dominant colours.
+- Supporting colours.
+- Accent colours.
+- Contrast relationships.
+- Background and foreground relationships.
+- Brand relevance.
+- Estimated colour values, where technically possible.
+
+Clearly label estimated colours as estimates rather than exact sampled values.
+
+E. Imagery
+- Main subject.
+- Composition.
+- Cropping.
+- Lighting.
+- Depth.
+- Visual treatment.
+- Relationship between image and message.
+- Image-to-text balance.
+
+F. Communication
+- Primary message.
+- Secondary information.
+- Audience relevance.
+- Call-to-action hierarchy.
+- Information density.
+- Clarity.
+- Potential weaknesses.
+
+G. Brand integrity
+- Visible logos.
+- Apparent brand colours.
+- Product images.
+- Mandatory claims or disclaimers, if identifiable.
+- Possible asset-preservation constraints.
+
+H. Design interpretation
+- Observable design facts.
+- Inferred design principles.
+- Reusable principles.
+- Context-specific techniques.
+- Potential limitations.
+- Confidence level.
+
+Do not claim to know the original designer's intentions unless documented by the user.
+
+## 3.3 Design intelligence records
+
+Store the analysis as structured JSON associated with the reference.
+
+Example schema:
+
+{
+  "referenceId": "reference-001",
+  "filename": "approved-reference.png",
+  "category": "poster",
+  "observations": {
+    "composition": [],
+    "typography": [],
+    "colour": [],
+    "imagery": [],
+    "hierarchy": []
+  },
+  "principles": [
+    {
+      "name": "Clear focal hierarchy",
+      "description": "Establish one dominant visual entry point",
+      "application": "Use when a campaign needs a fast, clear message",
+      "limitations": "Adapt for audiences and formats requiring more information",
+      "confidence": "medium"
+    }
+  ],
+  "protectedElements": [],
+  "userNotes": [],
+  "analysisStatus": "complete"
+}
+
+Use a proper schema and validate AI responses before storing them. Do not accept malformed JSON as a valid analysis record.
+
+## 3.4 Reference retrieval
+
+When a new project is created, retrieve references that match:
+- Artwork category.
+- Communication objective.
+- Audience.
+- Desired art direction.
+- Brand context.
+- Relevant design principles.
+
+Allow users to select or remove references manually.
+
+The AI must explain which principles it is borrowing and why they are relevant.
+
+Do not blindly reproduce the layout of one reference. Distinguish reusable principles from reference-specific content.
+
+## 3.5 Feedback and learning
+
+Allow the user to rate:
+- Reference relevance.
+- Quality of the analysis.
+- Usefulness of the design principle.
+- Quality of the generated result.
+
+Store this feedback with the relevant project or reference.
+
+Do not claim that these ratings retrain Gemini. Use them to improve retrieval, project preferences and evaluation criteria. Keep any future model-training process separate and explicit.
+
+---
+
+# PART 4 — BRAND AND ASSET INTEGRITY
+
+## 4.1 Asset management
+
+Create a brand asset library that supports:
+- Logos.
+- Product pack shots.
+- Approved product images.
+- Photographs.
+- Icons.
+- Font files.
+- Colour palettes.
+- Brand guidelines.
+- Approved claims.
+- Legal disclaimers.
+- Other reference materials.
+
+Each asset must have a unique identifier and metadata.
+
+Track:
+- Original filename.
+- File type.
+- Source.
+- Intended use.
+- Brand.
+- Project association.
+- Integrity requirements.
+- Permitted transformations.
+- User notes.
+
+## 4.2 Protected assets
+
+Assets can be marked as:
+
+- PROTECTED: do not alter the original.
+- PLACEMENT ONLY: positioning and proportional scaling are permitted.
+- CROPPING ALLOWED: crop only within the user's instructions.
+- EDITABLE: modifications are permitted within the specified scope.
+- REPLACEMENT REQUIRED: asset is outdated or awaiting approval.
+
+For protected logos and product pack shots:
+- Preserve the original file.
+- Do not redraw or regenerate it.
+- Do not rewrite packaging text.
+- Do not alter its aspect ratio.
+- Do not introduce invented product details.
+- Do not crop essential content.
+- Do not apply filters or effects unless explicitly authorised.
+
+When a supplied pack shot must remain unchanged, embed or place the original asset in the SVG. The AI may arrange the image within the layout but must not recreate the image itself.
+
+Use an asset manifest and record which file is used by each artwork element.
+
+## 4.3 Exact copy
+
+Maintain a separate approved-copy source.
+
+Support copy fields such as:
+- Headline.
+- Subheading.
+- Body text.
+- Product information.
+- Approved claims.
+- Call to action.
+- Disclaimer.
+- Contact information.
+- Footer.
+
+Compare the final artwork text against the approved source.
+
+Do not rewrite or paraphrase approved text without permission.
+
+If the design cannot accommodate the supplied copy, revise the layout before requesting a copy change.
+
+---
+
+# PART 5 — CREATIVE BRIEF AND STRATEGY ENGINE
+
+## 5.1 Brief parser
+
+Convert the user's form inputs into a structured project brief.
+
+The brief must distinguish:
+
+- Mandatory requirements.
+- Creative preferences.
+- Optional enhancements.
+- Prohibited changes.
+- Missing information.
+- Assumptions.
+- Production specifications.
+
+Ask a focused clarification question when an essential requirement is missing.
+
+Do not overwhelm the user with questions when a safe default can be used and clearly labelled.
+
+## 5.2 Strategic analysis
+
+For each brief, identify:
+
+1. Communication objective.
+2. Audience and viewing context.
+3. Primary message.
+4. Supporting messages.
+5. Desired audience response.
+6. Main information hierarchy.
+7. Brand requirements.
+8. Medium and production constraints.
+9. Success criteria.
+
+Do not introduce a marketing claim, audience insight or product benefit that is unsupported by the supplied material.
+
+## 5.3 Concept development
+
+Generate up to three meaningfully distinct concepts when the user requests exploration.
+
+For each concept provide:
+- Concept name.
+- Core creative idea.
+- Communication rationale.
+- Visual metaphor, if appropriate.
+- Focal point.
+- Composition.
+- Reading sequence.
+- Typography direction.
+- Colour direction.
+- Image direction.
+- Reference principles used.
+- Strengths.
+- Risks.
+- Production implications.
+
+Allow the user to select a concept before proceeding.
+
+If the user requests direct execution, choose the strongest defensible concept and continue without requiring unnecessary confirmation.
+
+---
+
+# PART 6 — CREATIVE ARCHITECT SYSTEM INSTRUCTIONS
+
+Use the following text as the dedicated system instruction for the creative reasoning model.
+
+## IDENTITY
+
+You are CREATIVE ARCHITECT, a professional AI Creative Art Director, Graphic Designer, Visual Communication Strategist and Artwork Production Specialist.
+
+You transform creative briefs and supplied references into strategically justified, original, visually sophisticated, editable graphic artwork.
+
+Your work must demonstrate:
+- Strategic thinking.
+- Design literacy.
+- Deliberate art direction.
+- Strong visual hierarchy.
+- Appropriate typography.
+- Controlled composition.
+- Effective use of negative space.
+- Brand consistency.
+- Asset integrity.
+- Production awareness.
+- Critical evaluation.
+
+## OPERATING METHOD
+
+For each project:
+
+1. Understand the brief.
+2. Inspect available assets.
+3. Analyse relevant references.
+4. Identify the communication problem.
+5. Develop the visual strategy.
+6. Establish a concept.
+7. Plan the layout.
+8. Define typography and colour.
+9. Construct the editable artwork.
+10. Render the artwork.
+11. Critique the actual rendered result.
+12. Revise identifiable weaknesses.
+13. Validate the source and PDF.
+14. Package the deliverables.
+
+## DESIGN PRINCIPLES
+
+Apply contrast, hierarchy, alignment, proximity, repetition, balance, proportion, negative space, typography, colour theory and Gestalt principles intentionally.
+
+Do not apply these principles as rigid templates. Choose what is appropriate for the brief.
+
+Premium design does not automatically mean minimalism, monochrome colour, gold accents or large empty areas.
+
+Choose the visual language according to the audience, brand, message, context and supplied references.
+
+Avoid generic AI-looking layouts, arbitrary decoration, random floating shapes, excessive effects, weak typography, overcrowding and irrelevant imagery.
+
+## REFERENCE-BASED DESIGN
+
+Use references to understand effective design decisions.
+
+Separate:
+- What is visibly present.
+- What design principle it demonstrates.
+- Why the principle may work.
+- Whether it applies to the current brief.
+- How it should be adapted.
+
+Do not confuse copying a reference with learning from it.
+
+## HEALTHCARE COMMUNICATION
+
+Treat supplied medical and product information as controlled content.
+
+Never invent medical claims, indications, contraindications, dosage instructions, clinical evidence, statistics, endorsements or product benefits.
+
+Do not imply regulatory approval or clinical efficacy without authorised source material.
+
+Preserve mandatory disclaimers and exact approved wording.
+
+Flag factual uncertainties for human review.
+
+## DESIGN RATIONALE
+
+Provide a concise, structured rationale explaining:
+- The selected concept.
+- The primary focal point.
+- The hierarchy.
+- The layout.
+- Typography.
+- Colour.
+- Image direction.
+- Reference principles.
+- Brand considerations.
+- Production decisions.
+
+Describe observable decisions and concise reasoning summaries. Do not claim to reveal private hidden model reasoning.
+
+## SOURCE INTEGRITY
+
+Preserve protected assets and exact approved copy.
+
+Do not silently substitute missing logos, product images, fonts or text.
+
+When an essential input is missing, ask for it or mark the relevant element as unresolved.
+
+Never claim that the final artwork is accurate without checking it.
+
+## OUTPUT HONESTY
+
+Do not claim that an SVG is editable unless its relevant content is represented by usable text, shapes, paths and image elements.
+
+Do not claim that a PDF is print-ready until the required production checks have been performed.
+
+Do not claim that a reference was analysed if it was inaccessible.
+
+Do not claim that a file exists unless the application has successfully generated it.
+
+## FINAL SUCCESS CRITERION
+
+Produce work that is strategically appropriate, visually effective, original, brand-compliant, factually accurate and technically usable.
+
+The goal is not simply to generate attractive images. The goal is to deliver real graphic design work.
+
+---
+
+# PART 7 — PROMPT STUDIO
+
+Build a Prompt Studio that generates a complete, editable project-specific prompt.
+
+The prompt must have separate sections for:
+
+1. Project overview.
+2. Communication objective.
+3. Audience.
+4. Reference analysis.
+5. Selected concept.
+6. Design rationale.
+7. Composition and grid.
+8. Typography.
+9. Colour.
+10. Image direction.
+11. Approved copy.
+12. Protected assets.
+13. Editable layout requirements.
+14. PDF production.
+15. Quality-control criteria.
+16. Negative constraints.
+17. Output deliverables.
+
+Provide two prompt types:
+
+A. VISUAL ASSET GENERATION PROMPT
+
+For generating a background, photograph, illustration or other visual asset with an image-generation model.
+
+B. EDITABLE LAYOUT CONSTRUCTION PROMPT
+
+For constructing the actual graphic artwork with text, shapes, images, measurements and layers.
+
+Do not combine these into one ambiguous instruction.
+
+Exact text, logos and product packaging must be handled by the layout engine or original asset placement, not recreated through image generation.
+
+Allow the user to:
+- View the prompt.
+- Edit it.
+- Copy it.
+- Save a version.
+- Regenerate it.
+- Download it as Markdown or TXT.
+
+---
+
+# PART 8 — EDITABLE ARTWORK ENGINE
+
+## 8.1 Initial output format
+
+Use SVG as the primary editable artwork format.
+
+Create real SVG markup with:
+- Explicit physical canvas dimensions.
+- A correct viewBox.
+- Separate text elements.
+- Editable vector shapes.
+- Logical element groups.
+- Stable element IDs.
+- Image placements.
+- Consistent spacing and alignment.
+- Defined colours and typography.
+- Optional layer metadata.
+
+Do not generate an SVG that merely contains one flattened image of the whole poster.
+
+## 8.2 SVG architecture
+
+Use meaningful group IDs such as:
+
+- background
+- brand-elements
+- headline
+- hero-visual
+- supporting-information
+- call-to-action
+- disclaimer
+- footer
+
+These are examples, not mandatory sections for every artwork.
+
+Store a separate layout specification describing the intended role and position of each major element.
+
+Validate the SVG markup before rendering. Reject malformed output and repair it before export.
+
+## 8.3 Layout specification
+
+Represent the layout in structured data.
+
+For example:
+
+{
+  "document": {
+    "widthMm": 594,
+    "heightMm": 841,
+    "orientation": "portrait"
+  },
+  "elements": [
+    {
+      "id": "headline",
+      "type": "text",
+      "role": "primary-message",
+      "x": 60,
+      "y": 100,
+      "width": 470,
+      "height": 100,
+      "contentSource": "approved-copy.headline",
+      "editable": true
+    }
+  ]
+}
+
+This is illustrative. Implement a proper schema and use consistent coordinate units throughout the actual application.
+
+Use a layout engine to translate structured element data into SVG markup. Do not depend on the language model to output an entire complex SVG correctly in a single uncontrolled response.
+
+## 8.4 SVG editor
+
+Create an artwork editor with:
+- Live SVG preview.
+- Zoom controls.
+- Selectable elements where practical.
+- Editable text.
+- Position and size controls.
+- Font and colour controls.
+- Layer ordering.
+- Asset replacement for non-protected assets.
+- Undo and redo.
+- Save revision.
+- Reset to last saved revision.
+
+Protected assets must remain locked unless the user explicitly changes their permission status.
+
+If full drag-and-drop editing cannot be completed reliably in the first iteration, implement a working property-based editor and keep the source downloadable. Do not display non-functional controls.
+
+## 8.5 SVG security
+
+Treat uploaded SVG files as untrusted content.
+
+Sanitise SVG markup and block scripts, event handlers, external executable references and unsafe embedded content before preview or export.
+
+Do not render arbitrary uploaded markup directly without validation.
+
+---
+
+# PART 9 — IMAGE GENERATION
+
+Integrate image generation only where supported by the available Gemini models and APIs.
+
+The application should:
+- Generate background imagery.
+- Generate contextual lifestyle imagery.
+- Generate illustrations where appropriate.
+- Create alternative visual directions.
+- Accept reference images where supported.
+- Save generated assets to the project.
+- Record the prompt used for each asset.
+
+Never rely on image generation to reproduce exact text, medical copy, brand logos or product packaging.
+
+When a protected product pack shot is supplied, place the original asset in the final layout.
+
+If image generation is unavailable or fails, continue supporting the editable layout workflow with supplied assets and clearly labelled placeholders.
+
+Do not pretend an image was generated if the request failed.
+
+---
+
+# PART 10 — PDF EXPORT AND PRODUCTION
+
+## 10.1 PDF generation
+
+Generate PDFs from the actual editable SVG source using a reliable SVG-to-PDF rendering library or a suitable server-side rendering pipeline.
+
+Use an appropriate maintained library compatible with the application runtime.
+
+The generated PDF must have the correct physical page dimensions.
+
+For the default A1 poster:
+- Trim width: 594 mm.
+- Trim height: 841 mm.
+- Orientation: portrait.
+
+Use the supplied printer specification to determine bleed, colour profile and other print requirements.
+
+If no printer specification exists, do not invent one. Allow a clearly labelled default preview export and state which settings remain unconfirmed.
+
+## 10.2 Production checks
+
+Check:
+- PDF creation success.
+- Page dimensions.
+- Page count.
+- Orientation.
+- Font handling.
+- Text clipping.
+- Image scaling.
+- Transparency.
+- Vector rendering.
+- Asset availability.
+- Content integrity.
+- Source-to-PDF visual consistency.
+
+Where possible, render the exported PDF back to an image and compare it visually with the approved SVG preview.
+
+Flag any discrepancies.
+
+## 10.3 Font handling
+
+Check whether required fonts are available.
+
+Use embedded fonts where supported and permitted. If fonts cannot be embedded or the renderer does not support a font correctly, report the limitation.
+
+Do not silently substitute fonts that materially alter the layout.
+
+## 10.4 Print limitations
+
+SVG and PDF export alone do not guarantee professional print compliance.
+
+Do not claim that a document uses CMYK, a particular ICC profile, PDF/X compliance, printer-specific bleed or a verified effective image resolution unless the pipeline actually checks or implements those requirements.
+
+Distinguish:
+- Editable source generated.
+- PDF exported.
+- Visual QA passed.
+- Print specification verified.
+- Human approval received.
+
+These are separate states.
+
+---
+
+# PART 11 — CRITIQUE AND QUALITY ASSURANCE
+
+## 11.1 Visual inspection
+
+After the SVG is generated, render a preview and analyse the actual rendered image.
+
+Use a multimodal model to inspect:
+- Hierarchy.
+- Composition.
+- Alignment.
+- Typography.
+- Readability.
+- Spacing.
+- Image balance.
+- Brand integration.
+- Unintended visual artefacts.
+- Compliance with the creative brief.
+
+Do not critique only the written SVG source. Inspect the rendered output.
+
+## 11.2 Content verification
+
+Compare the artwork's text against the approved copy.
+
+Use deterministic text comparison for text represented as editable SVG elements.
+
+Flag:
+- Missing copy.
+- Altered wording.
+- Unexpected text.
+- Duplicate text.
+- Incorrect punctuation.
+- Text overflow.
+- Unapproved claims.
+
+For text embedded inside raster assets, state that verification may require visual inspection or OCR and may not be definitive.
+
+## 11.3 QA report
+
+Return structured QA results:
+
+{
+  "overallStatus": "review-required",
+  "checks": [
+    {
+      "name": "Canvas dimensions",
+      "status": "passed",
+      "details": "A1 portrait dimensions verified"
+    },
+    {
+      "name": "Approved copy",
+      "status": "needs-review",
+      "details": "Human confirmation required for raster text"
+    }
+  ],
+  "blockers": [],
+  "warnings": [],
+  "recommendations": []
+}
+
+Use valid JSON internally and validate the schema.
+
+Possible check states:
+- PASSED
+- FAILED
+- NEEDS REVIEW
+- NOT APPLICABLE
+
+Do not use a single numerical quality score as the only acceptance criterion.
+
+## 11.4 Revision loop
+
+When defects are found:
+
+1. List the specific defects.
+2. Identify the relevant elements.
+3. Modify the editable source.
+4. Render the revised artwork.
+5. Rerun the relevant checks.
+6. Preserve the previous revision.
+7. Report the results.
+
+Allow the user to approve or reject the changes.
+
+Never modify approved copy or protected assets to resolve a layout issue without permission.
+
+---
+
+# PART 12 — APPLICATION DATA AND PROJECT STORAGE
+
+Implement a project data model containing:
+
+- Projects.
+- Creative briefs.
+- Reference files.
+- Reference analyses.
+- Brand assets.
+- Approved copy.
+- Design concepts.
+- Prompt versions.
+- Layout specifications.
+- SVG source revisions.
+- PDF export records.
+- QA reports.
+- User feedback.
+
+For the first version, persistent storage may use a suitable database or a reliable project-saving mechanism supported by the environment.
+
+Do not rely solely on temporary component state for information that should survive a refresh.
+
+If local browser storage is used for a prototype, label its limitations and provide project export/import.
+
+Use Firebase or another persistent database only when appropriate and correctly configured.
+
+Store generated files with their project IDs and version information.
+
+## Versioning
+
+Every saved revision should record:
+- Project ID.
+- Revision ID.
+- Timestamp.
+- Prompt version.
+- Source version.
+- QA status.
+- Change summary.
+
+Never overwrite the last approved version silently.
+
+---
+
+# PART 13 — TECHNICAL IMPLEMENTATION
+
+Use the full-stack web application capabilities available in Google AI Studio Build mode.
+
+Preferred architecture:
+
+Frontend:
+- React.
+- TypeScript.
+- Component-based UI.
+- Responsive design.
+- Typed project and asset models.
+
+Server:
+- Node.js.
+- Server-side Gemini API calls.
+- File validation.
+- SVG validation.
+- Rendering and PDF generation.
+- Export packaging.
+- Error handling.
+
+AI:
+- Gemini multimodal model for reference analysis and visual critique.
+- A suitable available text model for structured creative reasoning.
+- An image-generation model when supported by the available API.
+
+Rendering:
+- SVG-based editable source.
+- A suitable SVG renderer for previews.
+- A suitable PDF-generation library.
+
+Use maintained packages compatible with the generated runtime.
+
+## API security
+
+Keep Gemini API calls on the server side.
+
+Use the server-side secret provided by Google AI Studio for the Gemini API key.
+
+Never hardcode API keys in frontend files.
+
+Never return secret values to the browser.
+
+Validate all uploaded files and user inputs.
+
+Implement error handling, sensible request limits and clear user feedback.
+
+## Structured AI responses
+
+Where supported, use structured output or schema-constrained responses for:
+- Reference analysis.
+- Brief interpretation.
+- Concept generation.
+- Layout specification.
+- Prompt generation.
+- QA results.
+
+Validate all model output before using it in a production document.
+
+If a model response is incomplete or invalid, retry safely or display an actionable error. Never silently convert an invalid response into an apparently successful result.
+
+---
+
+# PART 14 — REQUIRED APPLICATION WORKFLOWS
+
+## Workflow A: Analyse a reference
+
+1. User uploads a reference.
+2. Application validates the file.
+3. Application creates a preview.
+4. Gemini analyses the visual design.
+5. Application validates the structured analysis.
+6. Reference record is saved.
+7. User reviews and edits the analysis.
+8. Approved design principles become searchable.
+
+## Workflow B: Create a new artwork
+
+1. User creates a project.
+2. User completes the brief.
+3. User uploads approved assets and copy.
+4. Application identifies missing inputs.
+5. Relevant references are retrieved.
+6. Creative direction is generated.
+7. User selects or approves a concept.
+8. Layout specification is created.
+9. Editable SVG is constructed.
+10. Preview is rendered.
+11. QA runs.
+12. The user reviews and revises the artwork.
+13. PDF is exported.
+14. Final files and report are packaged.
+
+## Workflow C: Generate a detailed prompt
+
+1. Load the brief.
+2. Load the selected reference analyses.
+3. Load the chosen concept.
+4. Load asset constraints.
+5. Load layout and production requirements.
+6. Generate the project-specific prompt.
+7. Separate image-generation instructions from layout instructions.
+8. Validate that all mandatory constraints are included.
+9. Display and save the prompt.
+
+## Workflow D: Export artwork
+
+1. Validate the SVG.
+2. Verify required assets.
+3. Verify copy.
+4. Render the SVG.
+5. Export the PDF.
+6. Confirm file creation.
+7. Verify dimensions.
+8. Inspect the PDF render.
+9. Generate a QA report.
+10. Provide working download actions for the actual files.
+
+## Workflow E: Improve an existing design
+
+1. Load an existing project.
+2. Display the current artwork.
+3. Accept a specific revision request.
+4. Identify affected elements.
+5. Preserve unrelated approved content.
+6. Modify the source.
+7. Render and inspect the result.
+8. Run relevant QA checks.
+9. Save a new revision.
+
+---
+
+# PART 15 — FINAL USER DELIVERABLES
+
+Every completed project should provide the following where applicable:
+
+1. artwork.svg — editable source.
+2. artwork.pdf — exported PDF.
+3. artwork-preview.png — preview image.
+4. generation-prompt.md — complete project-specific prompt.
+5. design-spec.json — layout and style specification.
+6. creative-rationale.md — design rationale.
+7. asset-manifest.json — asset references and restrictions.
+8. quality-report.json — QA results.
+9. README.md — project notes and export assumptions.
+
+The download controls must refer to actual generated files.
+
+Do not show fake download buttons or claim files exist before they have been created.
+
+Provide useful error messages if an export fails.
+
+---
+
+# PART 16 — ACCEPTANCE TESTS
+
+The application is not complete until the following tests work.
+
+TEST 1: REFERENCE ANALYSIS
+Upload an image and receive a structured design analysis that can be reviewed and saved.
+
+TEST 2: BRIEF CREATION
+Create a project using the default A1 portrait poster brief.
+
+TEST 3: ASSET PRESERVATION
+Upload a logo and product pack shot. Confirm the original assets are placed without redrawing or distortion.
+
+TEST 4: EXACT COPY
+Enter approved text and confirm that editable SVG text matches the supplied text.
+
+TEST 5: SVG GENERATION
+Generate an SVG containing multiple separately editable elements.
+
+TEST 6: PREVIEW
+Render the SVG and display the result.
+
+TEST 7: PDF EXPORT
+Export a PDF and confirm its existence, page count and physical dimensions.
+
+TEST 8: VISUAL QA
+Run the critique workflow and display findings from the actual rendered preview.
+
+TEST 9: REVISION
+Change one headline's size or position and confirm that the saved SVG changes and the preview updates.
+
+TEST 10: PROJECT PERSISTENCE
+Save a project, reload it and confirm that its brief, assets, prompt and artwork revision are retained by the chosen storage mechanism.
+
+TEST 11: ERROR HANDLING
+Attempt an unsupported or invalid upload and confirm that the application reports the problem without crashing.
+
+TEST 12: HONEST EXPORT STATUS
+Force or simulate an export failure and verify that the application does not claim the file was successfully created.
+
+---
+
+# PART 17 — BUILD PRIORITIES
+
+Implement the application in this order:
+
+PRIORITY 1:
+Project creation, brief form, asset upload, reference analysis and saved analysis records.
+
+PRIORITY 2:
+Creative direction, concept generation and prompt studio.
+
+PRIORITY 3:
+Editable SVG generation, live preview and property-based editing.
+
+PRIORITY 4:
+PDF export, QA checks and downloadable deliverables.
+
+PRIORITY 5:
+Revision history, persistent storage and improved visual critique.
+
+PRIORITY 6:
+Optional image generation, advanced layer editing and additional design formats.
+
+Do not attempt to implement every advanced feature as a superficial placeholder.
+
+Build and test each priority before moving to the next.
+
+If a feature cannot be completed, state the limitation, keep the rest of the application functional and identify the next implementation step.
+
+---
+
+# FINAL BUILD INSTRUCTION
+
+Now build CREATIVE ARCHITECT AI as a complete, operational full-stack web application.
+
+Do not return only a technical explanation, a proposed architecture, a static mockup or a list of recommendations.
+
+Create the actual application files, implement the core workflows, connect the Gemini API securely, install compatible dependencies, run the application, inspect the preview, resolve build errors and verify the acceptance tests that can be executed in the environment.
+
+Start by implementing the complete first working vertical slice:
+
+1. Create a project.
+2. Upload and analyse a reference artwork.
+3. Enter the creative brief.
+4. Generate the design rationale and detailed prompt.
+5. Construct editable SVG artwork.
+6. Render a preview.
+7. Export a PDF.
+8. Run quality checks.
+9. Download the actual files.
+
+Use the sample A1 healthcare product-awareness brief as the initial demonstration project, but make every field reusable for future projects.
+
+The final result must be a functional creative production tool, not merely an AI chatbot with a design-themed interface.

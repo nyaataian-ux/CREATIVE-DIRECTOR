@@ -1,0 +1,6 @@
+{
+  "name": "CREATIVE ARCHITECT AI",
+  "description": "AI Creative Art Director, Graphic Designer and Editable Artwork Production Studio",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
